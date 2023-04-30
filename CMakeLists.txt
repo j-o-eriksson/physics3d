@@ -8,21 +8,22 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
+# ------------------------------- #
+# external dependencies
+
 # glad dependency
 add_subdirectory(ext/glad)
 
 # glfw dependency
 add_subdirectory(ext/glfw)
 
-# ------------------------------- #
-# physics library 
-add_library(physicslib
-    ../phycpp/particle.cpp
-    )
+# physics dependency 
+add_library(ext/physics_playground)
 
-target_include_directories(physicslib PUBLIC ../ext/glm)
 
 # ------------------------------- #
+# internal libraries
+
 # rendering library 
 add_library(graphicslib
     src/graphics/shader/shader.cpp
