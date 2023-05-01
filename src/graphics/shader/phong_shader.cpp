@@ -4,8 +4,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/string_cast.hpp>
 
-#include <string>
 #include <iostream>
+#include <string>
 
 #include <shader/shader.hpp>
 
@@ -204,7 +204,8 @@ void main(void)
 
 phong_shader::phong_shader() {
   // compile shader program
-//   m_program = shader::compile_program(simple_vert_src.c_str(), simple_frag_src.c_str());
+  //   m_program = shader::compile_program(simple_vert_src.c_str(),
+  //   simple_frag_src.c_str());
   m_program = shader::compile_program(vert_src.c_str(), frag_src.c_str());
 
   // get uniform locations
@@ -224,23 +225,18 @@ phong_shader::phong_shader() {
   // initialize uniforms with default values
   bind();
 
-  // model matrix
   glm::mat4 model_matrix(1.f);
   set_model_matrix(model_matrix);
 
-  // camera position
   glm::vec3 camera_position(0.f, 0.f, 30.f);
   set_camera_pos(camera_position);
 
-  // view matrix
   glm::mat4 view_matrix =
       glm::lookAt(camera_position, glm::vec3(0.f), glm::vec3(0.f, 1.f, 0.f));
   set_view_matrix(view_matrix);
 
-  // projection matrix
-
-  glm::mat4 proj_matrix = glm::perspective(glm::pi<float>() * 60.f / 180.f,
-                                           640 / (float)480, 0.1f, 100.f);
+  glm::mat4 proj_matrix =
+      glm::perspective(glm::pi<float>() * 60.f / 180.f, 640 / (float)480, 0.1f, 100.f);
   set_projection_matrix(proj_matrix);
 
   // light products
@@ -263,7 +259,7 @@ phong_shader::phong_shader() {
   // lights
   set_num_lights(2);
   set_light_position(0, glm::vec3(-2.5f, 2.5f, 1.f));
-  set_light_position(1, glm::vec3( 2.5f, 2.5f, 1.f));
+  set_light_position(1, glm::vec3(2.5f, 2.5f, 1.f));
 
   // uniform cube color
   glUniform3f(glGetUniformLocation(m_program, "u_diffuse_color"), 0.75f, 0.75f, 0.f);
@@ -277,7 +273,9 @@ phong_shader::~phong_shader() {
   // destroy program?
 }
 
-void phong_shader::bind() { glUseProgram(m_program); }
+void phong_shader::bind() {
+  glUseProgram(m_program);
+}
 
 void phong_shader::set_model_matrix(const glm::mat4& m) {
   glUniformMatrix4fv(u_model_mat, 1, GL_FALSE, glm::value_ptr(m));
@@ -333,8 +331,8 @@ void phong_shader::print_uniform_locations() {
             << "u_material_shininess: " << u_material_shininess << "\n"
             << "u_light_positions: " << u_light_positions << "\n"
             << "u_num_lights: " << u_num_lights << "\n"
-            << "u_diffuse_color: "
-            << glGetUniformLocation(m_program, "u_diffuse_color") << "\n";
+            << "u_diffuse_color: " << glGetUniformLocation(m_program, "u_diffuse_color")
+            << "\n";
 }
 
 }  // namespace graphics::shader

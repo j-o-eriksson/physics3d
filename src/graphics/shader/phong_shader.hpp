@@ -60,6 +60,7 @@ class phong_shader {
   GLint u_light_positions;
   GLint u_num_lights;
 
+  // shader program
   GLuint m_program;
 
   void print_uniform_locations();
