@@ -11,18 +11,17 @@ std::optional<std::string> get_shader_error(GLuint shader) {
   GLint isCompiled;
   glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
 
-  if (isCompiled == GL_FALSE) {
-    GLint maxLength;
-    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
-
-    // The maxLength includes the NULL character
-    std::vector<GLchar> errorLog(maxLength);
-    glGetShaderInfoLog(shader, maxLength, &maxLength, errorLog.data());
-
-    return std::string(errorLog.data());
-  } else {
+  if (isCompiled != GL_FALSE) {
     return std::nullopt;
   }
+
+  GLint maxLength;
+  glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+
+  std::vector<GLchar> errorLog(maxLength);
+  glGetShaderInfoLog(shader, maxLength, &maxLength, errorLog.data());
+
+  return std::string(errorLog.data());
 }
 
 GLuint compile_program(const char* vert_src, const char* frag_src) {

@@ -18,7 +18,7 @@ add_subdirectory(ext/glad)
 add_subdirectory(ext/glfw)
 
 # physics dependency 
-# add_subdirectory(ext/physics_playground)
+add_subdirectory(ext/physics_playground)
 
 
 # ---- internal libraries ---- #
@@ -39,5 +39,5 @@ add_executable(Phy3d
     src/main.cpp
     )
 
-target_link_libraries(Phy3d PUBLIC glad glfw graphicslib)
+target_link_libraries(Phy3d PUBLIC glad glfw graphicslib jphys)
 target_include_directories(Phy3d PUBLIC ext/glm)
