@@ -5,11 +5,10 @@
 
 #include <glm/ext.hpp>
 #include <glm/glm.hpp>
-#include "../ext/glfw/deps/linmath.h"
 
-#include <gl_utilities/cube_mesh.hpp>
-#include <shader/phong_shader.hpp>
 #include <particle.hpp>
+#include <shader/phong_shader.hpp>
+#include <utils/cube_mesh.hpp>
 
 #include <stddef.h>
 #include <stdio.h>
@@ -67,10 +66,8 @@ int main(void) {
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
     const float ratio = width / (float)height;
-    glViewport(0, 0, width, height);
-    glm::mat4 proj_matrix =
-        glm::perspective(glm::pi<float>() * 60.f / 180.f, ratio, 0.1f, 100.f);
 
+    glViewport(0, 0, width, height);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClearDepth(1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -78,6 +75,9 @@ int main(void) {
     auto matrix_buffer = std::vector<glm::mat4>{glm::mat4(1.f)};
     matrix_buffer[0][3] = glm::vec4{0.f, 0.f, -3.f, 1.f};
     graphics::utilities::update_matrix_buffer(matrix_buffer_object, matrix_buffer);
+
+    glm::mat4 proj_matrix =
+        glm::perspective(glm::pi<float>() * 60.f / 180.f, ratio, 0.1f, 100.f);
 
     phong_shader.bind();
     phong_shader.set_projection_matrix(proj_matrix);

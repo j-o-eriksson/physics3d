@@ -228,7 +228,7 @@ phong_shader::phong_shader() {
   glm::mat4 model_matrix(1.f);
   set_model_matrix(model_matrix);
 
-  glm::vec3 camera_position(0.f, 0.f, 30.f);
+  glm::vec3 camera_position(1.f, 0.f, -5.f);
   set_camera_pos(camera_position);
 
   glm::mat4 view_matrix =

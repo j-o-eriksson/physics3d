@@ -21,13 +21,13 @@ add_subdirectory(ext/glfw)
 add_subdirectory(ext/physics_playground)
 
 
-# ---- internal libraries ---- #
-# rendering library 
+# ---- internal modules ---- #
+# rendering module 
 add_library(graphicslib
     src/graphics/shader/shader.cpp
     src/graphics/shader/phong_shader.cpp
     src/graphics/renderer/renderer.cpp
-    src/graphics/gl_utilities/cube_mesh.cpp
+    src/graphics/utils/cube_mesh.cpp
     )
 
 target_link_libraries(graphicslib PUBLIC glad)
